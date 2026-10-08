@@ -3,8 +3,10 @@
 
 #include "Entity.h"
 #include "Player.h"
+#include "Camera.h"
 #include "Systems/Audio.h"
 #include "Components/ColliderComponent.h"
+#include <memory>
 
 class Game : public gApplication {
 public:
@@ -12,28 +14,33 @@ public:
 	
 	void start() override {
 		Super::start();
+
+		auto camera = gInst<gCamera>(activeScene);
 		
-		std::unique_ptr<gEntity> floor = std::make_unique<gPlayer>(activeScene);
+		auto floor = gInst<gPlayer>(activeScene);
 		//player->attachComponent<TextureComponent>("assets/cursor2.png", gGenerateID());
 		floor->attachComponent<AABBColliderComponent>(floor->transform, gGenerateID());
 		floor->ccollider().render = true;
 		floor->transform.position = Vector2(0.f, -365.f);
 		floor->transform.size.x = 1500;
 		
-		std::unique_ptr<gEntity> object = std::make_unique<gEntity>(activeScene);
-		object->attachComponent<PhysicsComponent>(gGenerateID());
-		object->cphysics().setActive(false);
-		object->attachComponent<AABBColliderComponent>(object->transform, gGenerateID());
+		auto player = gInst<gPlayer>(activeScene);
+		player->attachComponent<PhysicsComponent>(gGenerateID());
+		player->cphysics().setActive(false);
+		player->attachComponent<AABBColliderComponent>(player->transform, gGenerateID());
 
-		std::unique_ptr<gEntity> wall = std::make_unique<gEntity>(activeScene);
+		auto wall = gInst<gEntity>(activeScene);
 		wall->transform.position = Vector2(-500, 0);
 		wall->transform.size 	 = Vector2(100, 1000);
 		wall->attachComponent<AABBColliderComponent>(wall->transform, gGenerateID());
 		
 		activeScene->addEntity(std::move(floor));
-		activeScene->addEntity(std::move(object));
+		activeScene->addEntity(std::move(player));
 		activeScene->addEntity(std::move(wall));
+		gEntity* p_cam = activeScene->addEntity(std::move(camera));
 		activeScene->setSkybox(Vector4(1.0f, 0.7f, 0.4f, 1.0f));
+		activeScene->setActiveCam(p_cam->id);
+		std::cout << "test\n";
 		
 		audio.init();
 		audio.startAudio("assets/music.wav", true);

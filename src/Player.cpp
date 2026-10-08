@@ -1,22 +1,21 @@
 #include "Player.h"
+#include "Components/PhysicsComponent.h"
 
 void gPlayer::tick() {
     Super::tick();
 	if(InputManager::isKeyHeld(GLFW_KEY_D)) { 
-		transform.position.x += move * Time::deltaTime;
-		if(ccollider().collides()) transform.position.x -=move * Time::deltaTime;
+		if(const auto& physics = getActiveComponent<PhysicsComponent>()) {
+			physics->addImpulse({1000.f, 0});
+		}
 	} 
 	if(InputManager::isKeyHeld(GLFW_KEY_A)) { 
-		transform.position.x -= move * Time::deltaTime;
-		if(ccollider().collides()) transform.position.x +=move * Time::deltaTime;
+		if(const auto& physics = getActiveComponent<PhysicsComponent>()) {
+			physics->addImpulse({-10000.f, 0});
+		}
 	}
-	if(InputManager::isKeyHeld(GLFW_KEY_W)) { 
-		transform.position.y += move * Time::deltaTime;
-		if(ccollider().collides()) transform.position.y -=move * Time::deltaTime;
+	if(InputManager::isKeyPressed(GLFW_KEY_SPACE)) {
+		if(const auto& physics = getActiveComponent<PhysicsComponent>()) {
+			physics->addImpulse({0.f, 1000});
+		}
 	}
-	if(InputManager::isKeyHeld(GLFW_KEY_S)) { 
-		transform.position.y -= move * Time::deltaTime;
-		if(ccollider().collides()) transform.position.y +=move * Time::deltaTime;
-	}
-	if(InputManager::isKeyPressed(GLFW_MOUSE_BUTTON_1)) std::cout << "Mouse at: " << InputManager::getMousePos().x << InputManager::getMousePos().y << std::endl;
 }

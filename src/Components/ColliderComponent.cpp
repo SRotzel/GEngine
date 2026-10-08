@@ -2,7 +2,7 @@
 #include <imgui.h>
 
 AABBColliderComponent::AABBColliderComponent(Transform t, unsigned int id) 
-        : Component(id) {
+        : Component() {
     updateBounds(t);
     collision = {};
     render = false;

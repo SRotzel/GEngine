@@ -6,7 +6,7 @@ int main(int argc, char** argv);
 
 #include "gEngine.h"
 int main(int argc, char** argv) {
-    std::cout << "Starting Engine...\n";
+    std::cout << "Starting gEngine...\n";
     G_ENTRY_POINT *entry = new G_ENTRY_POINT();
     {
         gEngine *instance = new gEngine(entry);
@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
 #else
 
 int main(int argc, char** argv) {
-    std::cout << "[WARNING] NO G_ENTRY_POINT DEFINED\n";
+    std::cout << "[WARNING] (G_ENTRY_POINT) NOT DEFINED\n";
 }
 
 #endif

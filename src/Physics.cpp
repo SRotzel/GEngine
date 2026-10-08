@@ -98,9 +98,9 @@ void PhysicsSystem::physicsTick() {
                     actualMovement *= closest.time;
                 }
             }
-            pc->getOwner()->transform.position += actualMovement;
-
+            if(actualMovement == v2zero()) pc->velocity = v2zero();
             pc->force = v2zero();
+            pc->getOwner()->transform.position += actualMovement;
             continue;
         }
         if(auto c = e->getActiveComponent<AABBColliderComponent>()) {

@@ -1,13 +1,8 @@
 #include "gEngine.h"
-#include "Entity.h"
-#include "gEngineCore.h"
-#include <glm/ext/quaternion_transform.hpp>
-#include <imgui.h>
-#include <memory>
+#include "Scene.h"
 
-gEngine::gEngine(gApplication* a) : app(a), currentCam(-2.f, 2.f, -1.5f, 1.5f), developerDebug(true) {
-    shaderPaths.push_back("src/shaders/basic.vert");
-    shaderPaths.push_back("src/shaders/basic.frag");
+gEngine::gEngine(gApplication* a) : app(a), developerDebug(true) {
+    
 }
 gEngine::~gEngine() {}
 
@@ -30,23 +25,32 @@ void gApplication::loadScene(gScene *s) {
     activeScene->start();
 }
 
-void gEngine::addShader(const std::string &path) {
-    shaderPaths.push_back(path);
+gRenderer::ShaderProgram* compileShaderProgram(const std::map<std::string, GLenum> paths) {
+    gRenderer::ShaderProgram* prog;
+    for(const auto& it : paths) {
+        prog->addShader(it.first, it.second);
+    }
+    prog->link();
+    return prog;
 }
 
-void gEngine::setCamera(const gCamera &c) {
+void gEngine::bindShaderProgram(gRenderer::ShaderProgram* program) {
+    this->program = program;
+    program->bind();
+}
+
+/*void gEngine::setCamera(const gCamera &c) {
     currentCam = c;
 }
 
-gCamera *gEngine::getCamera() { return &currentCam; }
+gCamera *gEngine::getCamera() { return &currentCam; }*/
 
 void gEngine::start() {
     renderer.init(false, "gEngine", 1280, 720);
     renderer.initDebugGUI();
-    Vector4 ortho = Vector4(-(renderer.winInfo.width / 2), renderer.winInfo.width / 2, -(renderer.winInfo.height / 2), renderer.winInfo.height / 2);
-    currentCam.realign(ortho.x, ortho.y, ortho.z, ortho.w);
+    //currentCam.realign(ortho.x, ortho.y, ortho.z, ortho.w);
     
-    program = std::make_unique<gRenderer::ShaderProgram>();
+    program = new gRenderer::ShaderProgram();
     program->addShader("src/shaders/basic.vert", GL_VERTEX_SHADER); 
     program->addShader("src/shaders/basic.frag", GL_FRAGMENT_SHADER); 
     program->link();
@@ -58,6 +62,11 @@ void gEngine::start() {
         for(auto& e : app->activeScene->getEntities()) {
             e->start();
         }
+        Vector4 ortho = Vector4(-(renderer.winInfo.width / 2), renderer.winInfo.width / 2, -(renderer.winInfo.height / 2), renderer.winInfo.height / 2);
+        gCamera* activeCam = app->activeScene->getActiveCam();
+        if(activeCam != nullptr) activeCam->realign(ortho);
+        else std::cout << "Warning: missing active Camera!" << std::endl;
+
         physics.init(app->activeScene);
     }
 
@@ -121,11 +130,12 @@ void gEngine::drawDebugGui() const {
 void gEngine::draw(const gRenderer::VertexArray& vao, const gRenderer::IndexBuffer &ibo) {
     renderer.clear(app->activeScene->getSkybox());
     if(developerDebug) {
-        renderer.beginSceneDebug(currentCam, *program);
-        if(ImGui::Checkbox("fullscreen", &renderer.winInfo.fullscreen)) renderer.setFullscreen(renderer.winInfo.fullscreen, &currentCam);
+        renderer.beginSceneDebug(app->activeScene->getActiveCam()->grCamera(), *program);
+        if(ImGui::Checkbox("fullscreen", &renderer.winInfo.fullscreen)) 
+            renderer.setFullscreen(renderer.winInfo.fullscreen, &app->activeScene->getActiveCam()->grCamera()); // TODO: maybe refactor (is pointer necessary?)
         drawDebugGui();
         app->onDebug(); 
-    } else renderer.beginScene(currentCam, *program);
+    } else renderer.beginScene(app->activeScene->getActiveCam()->grCamera(), *program);
 
     if(app->activeScene) {
         for(const auto &e : app->activeScene->getEntities()) {

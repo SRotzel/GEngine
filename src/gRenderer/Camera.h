@@ -9,6 +9,9 @@ namespace gRenderer {
         {
             recalcViewMatrix();
         }
+        grCamera() : camRotation(0.0f), camPosition(0.0f), projection(glm::ortho(-1.f, 1.f, -1.f, 1.f)){
+            recalcViewMatrix();
+        }
         ~grCamera() {}
 
         void setPosition(const glm::vec3& pos )     { camPosition = pos;     recalcViewMatrix(); }
@@ -24,7 +27,7 @@ namespace gRenderer {
         inline glm::vec3 getPosition() const { return camPosition; }
         inline glm::mat4 getViewProj() const { return viewProjection; }
         
-    private:
+    protected:
         void recalcViewMatrix() {
             glm::mat4 transform = glm::translate(glm::mat4(1.0f), camPosition) 
                                 * glm::rotate(glm::mat4(1.0f), glm::radians(camRotation), glm::vec3(0, 0, 1));

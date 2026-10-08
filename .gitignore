@@ -1,3 +1,8 @@
+.gitignore
+imgui.ini
 a.out
 changes.md
 notes.md
+assets/
+imgui.ini
+src/main.cpp

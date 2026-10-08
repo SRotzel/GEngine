@@ -14,7 +14,7 @@ using gRenderer::Texture;
 class TextureComponent : public Component {
 public:
     TextureComponent(std::string texturePath = "", unsigned int id = 0) 
-        : Component(id), path(texturePath) {
+        : Component(), path(texturePath) {
         texture = std::make_unique<Texture>(path);
     }
 

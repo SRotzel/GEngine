@@ -8,9 +8,10 @@
 #include "Components/TextureComponent.h"
 #include "Physics.h"
 
+#include <map>
+#include <vector>
 #include <imgui.h>
 #include <unordered_map>
-#include <chrono>
 
 class gEngine;
 
@@ -61,14 +62,15 @@ public:
     gEngine(gApplication* = nullptr);
     ~gEngine();
 
-    void addShader(const std::string &path);
-
     void start();
     void run();
     void end();
-
-    void setCamera(const gCamera&);
-    gCamera* getCamera();
+    
+    /*void setCamera(const gCamera&);
+    gCamera* getCamera();*/
+    
+    gRenderer::ShaderProgram* compileShaderProgram(const std::map<std::string, GLenum> paths);
+    void bindShaderProgram(gRenderer::ShaderProgram* program);
 
 private:
     void draw(const gRenderer::VertexArray&, const gRenderer::IndexBuffer&);
@@ -77,9 +79,8 @@ private:
 
     PhysicsSystem physics;
     gApplication* app = nullptr;
-    gRenderer::grCamera      currentCam;
-
+    
+    //gRenderer::grCamera      currentCam;
     gRenderer::gRenderer2D   renderer;
-    std::unique_ptr<gRenderer::ShaderProgram> program;
-    std::vector<std::string> shaderPaths;
+    gRenderer::ShaderProgram* program;
 };

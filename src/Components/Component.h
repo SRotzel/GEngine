@@ -5,7 +5,7 @@ class gEntity;
 
 class Component {
 public:
-    Component(unsigned int id = 0) : id(id), active(true) {}
+    Component() : id(gGenerateID()), active(true) {}
     virtual ~Component() {}
 
     virtual void start() {}

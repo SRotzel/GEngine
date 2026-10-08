@@ -4,6 +4,7 @@
 #pragma once
 
 #include "gRenderer/Camera.h"
+#include <memory>
 #include <cmath>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/vec3.hpp>
@@ -11,10 +12,21 @@
 #include <glm/mat4x4.hpp>
 #include <iostream>
 
+// validate unique identifiers. Returns true on valid ids
+#define gValidateID(x) x != 0; 
+
+#ifndef SCALE 
+#define SCALE 10.0f
+#endif
+
 using gUint = unsigned int;
 static gUint gidIndex = 1;
 static gUint gGenerateID() { 
     return gidIndex++; 
+}
+
+static void debug(std::string message) {
+    
 }
 
 using Vector2 = glm::vec2;
@@ -22,13 +34,22 @@ using Vector3 = glm::vec3;
 using Vector4 = glm::vec4;
 using Matrix4 = glm::mat4;
 
+using std::move, std::unique_ptr, std::forward;
+template<typename T, typename... Args>
+unique_ptr<T> gInst(Args&&... a) {
+    return std::make_unique<T>(std::forward<Args>(a)...);
+}
+
 static inline Vector2 v2zero() { return Vector2 {0.f, 0.f}; }
 static inline Vector3 v3zero() { return Vector3 {0.f, 0.f, 0.f}; }
 static inline Vector4 v4zero() { return Vector4 {0.f, 0.f, 0.f, 0.f}; }
 
-using gCamera = gRenderer::grCamera;
-
 struct Transform {
+    bool operator==(const Transform& other) const {
+        if(position == other.position && size == other.size && rotation == other.rotation) return true;
+        return false;
+    }
+
     glm::vec2 position{0.f, 0.f};
     glm::vec2 size{100.f, 100.f};
     float rotation {0.f};
@@ -48,8 +69,7 @@ struct Transform {
 };
 
 static glm::mat4 getModelMatrix(const Transform& t) {
-    return glm::translate(Matrix4(1.0f), glm::vec3(t.position, 0.0f)) 
-                        * glm::rotate(glm::mat4(1.0f), -glm::radians(t.rotation), glm::vec3(0.f, 0.f, 1.f))
-                        * glm::scale(glm::mat4(1.0f), glm::vec3(t.size, 0.f) 
-            );
+    return glm::translate(Matrix4(1.0f), glm::vec3(t.position, 0.0f))
+         * glm::rotate(glm::mat4(1.0f), -glm::radians(t.rotation), glm::vec3(0.f, 0.f, 1.f))
+         * glm::scale(glm::mat4(1.0f), glm::vec3(t.size, 0.f));
 }

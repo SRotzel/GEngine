@@ -60,13 +60,16 @@ public:
     inline AABBColliderComponent& ccollider() { return *getComponent<AABBColliderComponent>(); }
     inline bool isActive() const { return this->active; }
     inline void setActive(bool v) { this->active = v; }
+    inline void toggle() { active = !active; }
 
     Transform transform;
     gUint id;
 
 protected:
+    using Super = gEntity;  
     bool active;
-    using Super = gEntity;
+    std::string name; // TODO
+
 private:
     gScene *owner;
     std::vector<std::unique_ptr<Component>> components;
