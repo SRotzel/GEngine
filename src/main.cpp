@@ -8,6 +8,16 @@
 #include "Components/ColliderComponent.h"
 #include <memory>
 
+class MovingCamera : public gCamera {
+public:
+	MovingCamera(gScene* s) : gCamera(s) { }
+
+	void tick() override {
+		Super::tick();
+		if(InputManager::isKeyPressed(GLFW_KEY_A)) transform.position.x -= 1;
+	}
+};
+
 class Game : public gApplication {
 public:
 	Game() : gApplication() {}
@@ -16,6 +26,8 @@ public:
 		Super::start();
 
 		auto camera = gInst<gCamera>(activeScene);
+		camera->transform.position = {0.f, 0.f};
+		camera->transform.rotation = 0;
 		
 		auto floor = gInst<gPlayer>(activeScene);
 		//player->attachComponent<TextureComponent>("assets/cursor2.png", gGenerateID());
@@ -24,7 +36,7 @@ public:
 		floor->transform.position = Vector2(0.f, -365.f);
 		floor->transform.size.x = 1500;
 		
-		auto player = gInst<gPlayer>(activeScene);
+		auto player = gInst<gPlayer>(activeScene, "Player");
 		player->attachComponent<PhysicsComponent>(gGenerateID());
 		player->cphysics().setActive(false);
 		player->attachComponent<AABBColliderComponent>(player->transform, gGenerateID());
@@ -35,8 +47,9 @@ public:
 		wall->attachComponent<AABBColliderComponent>(wall->transform, gGenerateID());
 		
 		activeScene->addEntity(std::move(floor));
-		activeScene->addEntity(std::move(player));
 		activeScene->addEntity(std::move(wall));
+		gEntity* p_player = activeScene->addEntity(std::move(player));
+		//camera->followEntity(p_player);
 		gEntity* p_cam = activeScene->addEntity(std::move(camera));
 		activeScene->setSkybox(Vector4(1.0f, 0.7f, 0.4f, 1.0f));
 		activeScene->setActiveCam(p_cam->id);

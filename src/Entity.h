@@ -13,6 +13,7 @@ class gScene;
 class gEntity {
 public:
     gEntity(gScene* parent);
+    gEntity(gScene* parent, const std::string &name);
     virtual ~gEntity();
 
     gEntity(const gEntity&) = delete;
@@ -54,6 +55,9 @@ public:
         return nullptr;
     }
     std::vector<std::unique_ptr<Component>> &getComponents();
+
+    void rename(const std::string &name);
+    const std::string &getName() const;
 
     inline PhysicsComponent& cphysics() { return *getComponent<PhysicsComponent>(); }
     inline TextureComponent& ctexture() { return *getComponent<TextureComponent>(); }

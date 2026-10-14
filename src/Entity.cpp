@@ -1,11 +1,17 @@
 #include "Entity.h"
-#include "Components/Component.h"
-#include "gEngineCore.h"
-#include <memory>
 
-gEntity::gEntity(gScene* parent) : owner(parent), id(gGenerateID()), active(true) {}
+gEntity::gEntity(gScene* parent) : owner(parent), id(gGenerateID()), active(true) {
+    transform.rotation = 0.0f;
+    transform.size = Vector2(100, 100);
+    transform.position = Vector2(0,0);
+}
+
+gEntity::gEntity(gScene* parent, const std::string &name) : owner(parent), id(gGenerateID()), active(true) {
+    transform.rotation = 0.0f;
+    transform.size = Vector2(100, 100);
+    transform.position = Vector2(0,0);
+}
 gEntity::~gEntity() {}
-
 
 void gEntity::start() {
     for(auto& c : components) {
@@ -14,6 +20,9 @@ void gEntity::start() {
 }
 
 void gEntity::tick() {
+    if(transform.rotation > 360 || transform.rotation < -360) transform.rotation = 0;
+
+    if(!this->active) return;
     for(auto& c : components) {
         c->tick();
     }
@@ -24,6 +33,9 @@ void gEntity::end() {
         c->end();
     }
 }
+
+void gEntity::rename(const std::string &name) { this->name = name; }
+const std::string& gEntity::getName() const { return name; }
 
 void gEntity::attachComponent(std::unique_ptr<Component> c) {
     if(c->getID() == 0) {

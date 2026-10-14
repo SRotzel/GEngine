@@ -16,7 +16,7 @@ void gCamera::followEntity(gEntity *entity) {
 }
 
 void gCamera::start() {
-    Super::start();
+    gEntity::start();
     if(spotlightEntity) {
         cam->setPosition(Vector3(spotlightEntity->transform.position, 0.f));
         cam->setRotation(spotlightEntity->transform.rotation);
@@ -25,13 +25,17 @@ void gCamera::start() {
 }
 
 void gCamera::tick() {
-    Super::tick();
-    if(!spotlightEntity) return;
+    gEntity::tick();
+    // Make sure no weird bugs appear....
+    //transform.size = Vector2(0,0);
+
+    /*if(!spotlightEntity) return;
     if(transform == spotlightEntity->transform) return;
 
     transform = spotlightEntity->transform;
-    cam->setPosition(Vector3(transform.position, 0.f));
-    cam->setRotation(transform.rotation);
+    cam->setPosition(gPosToGLPos(Vector3(transform.position, 0.f)));
+    //cam->setRotation(transform.rotation);
+    */
 }
 
 void gCamera::realign(Vector4 v4) {
@@ -44,6 +48,6 @@ gRenderer::grCamera& gCamera::grCamera() const {
 };
 
 void gCamera::end() {
-    Super::end();
+    gEntity::end();
     spotlightEntity = nullptr;
 }

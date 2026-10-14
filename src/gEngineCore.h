@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "gRenderer/Camera.h"
 #include <memory>
 #include <cmath>
 #include <glm/ext/matrix_transform.hpp>
@@ -24,6 +23,8 @@ static gUint gidIndex = 1;
 static gUint gGenerateID() { 
     return gidIndex++; 
 }
+
+static glm::vec2 windowDimensions;
 
 static void debug(std::string message) {
     
@@ -55,10 +56,9 @@ struct Transform {
     float rotation {0.f};
 
     glm::mat4 getMatrix() const {
-        glm::mat4 m = glm::translate(glm::mat4(1.f), glm::vec3(position, 0.f)); // ignore z
-        m = glm::rotate(m, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
-        m = glm::scale(m, glm::vec3(size, 1.0f));
-        return m;
+         return glm::translate(Matrix4(1.0f), glm::vec3(position, 0.0f))
+         * glm::rotate(glm::mat4(1.0f), -glm::radians(rotation), glm::vec3(0.f, 0.f, 1.f))
+         * glm::scale(glm::mat4(1.0f), glm::vec3(size, 0.f));
     }
 
     void translate(const glm::vec2& delta) { position += delta; }
@@ -68,8 +68,8 @@ struct Transform {
     glm::vec2 right() const   { return glm::vec2(-std::sin(rotation), std::cos(rotation)); }
 };
 
-static glm::mat4 getModelMatrix(const Transform& t) {
-    return glm::translate(Matrix4(1.0f), glm::vec3(t.position, 0.0f))
-         * glm::rotate(glm::mat4(1.0f), -glm::radians(t.rotation), glm::vec3(0.f, 0.f, 1.f))
-         * glm::scale(glm::mat4(1.0f), glm::vec3(t.size, 0.f));
+// converts a position in gEngine coordinates to openGL coordinates
+static glm::vec3 gPosToGLPos(glm::vec3 gpos) {
+    glm::vec3 glPos = {gpos.x / windowDimensions.x, gpos.y / windowDimensions.y, 0.f};
+    return glPos;
 }

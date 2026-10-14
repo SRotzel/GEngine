@@ -10,7 +10,6 @@
 
 #include <map>
 #include <vector>
-#include <imgui.h>
 #include <unordered_map>
 
 class gEngine;
@@ -32,8 +31,8 @@ public:
     // called during debug draw calls
     virtual void onDebug() {
         for(const auto& e : activeScene->getEntities()) {
-            // Dev Debug gui
-            std::string label = "Entity " + std::to_string(e->id);
+            // Dev debug gui
+            std::string label = e->getName() + std::to_string(e->id);
             if(ImGui::CollapsingHeader(label.c_str())) {
                 if(ImGui::Button("Delete")) {
                     activeScene->removeEntity(e->id);

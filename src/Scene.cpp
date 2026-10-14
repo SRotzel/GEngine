@@ -28,13 +28,6 @@ void gScene::removeEntity(gUint id) {
 }
 
 void gScene::setActiveCam(gUint id) { 
-    std::cout << "trying to activate camera " << id << std::endl;
-    /*for(const auto& e : entities) {
-        std::cout << e->id << std::endl;
-        if(e->id != id) continue;
-        if(e.get()) activeCamera = dynamic_cast<gCamera*>(e.get()); // todo: refactor all this bs, bad practice
-        else activeCamera = nullptr;
-    }*/
     for(auto it = entities.begin(); it != entities.end(); ++it) {
         if(it->get()->id != id) continue;
         gCamera *temp = dynamic_cast<gCamera*>(it->get());

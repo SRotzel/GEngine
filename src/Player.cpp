@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "Components/PhysicsComponent.h"
 
 void gPlayer::tick() {
     Super::tick();

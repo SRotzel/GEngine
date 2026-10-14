@@ -19,6 +19,7 @@ public:
     gRenderer::grCamera &grCamera() const;
 
 protected:
+    using Super = gCamera;
     gEntity* spotlightEntity;
     gRenderer::grCamera* cam;
 };

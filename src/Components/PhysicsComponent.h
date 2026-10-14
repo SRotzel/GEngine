@@ -2,7 +2,6 @@
 #include "Component.h"
 #include "../Systems/Time.h"
 #include "../gEngineCore.h"
-#include <imgui.h>
 
 class PhysicsComponent : public Component {
 public:

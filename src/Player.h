@@ -6,6 +6,7 @@
 class gPlayer : public gEntity {
 public:
 	gPlayer(gScene* s) : gEntity(s) {}
+	gPlayer(gScene* s, const std::string &name) : gEntity(s, name) {}
 
 	void tick() override;
 private:

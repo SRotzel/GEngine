@@ -1,6 +1,6 @@
 #pragma once
-#include <imgui.h>
 #include "../gEngineCore.h"
+#include "../../include/imgui/imgui.h"
 class gEntity;
 
 class Component {

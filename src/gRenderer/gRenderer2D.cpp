@@ -1,8 +1,4 @@
 #include "gRenderer2D.h"
-#include <GLFW/glfw3.h>
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
 
 namespace gRenderer {
     void GLAPIENTRY glErrorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam) {
@@ -91,10 +87,10 @@ namespace gRenderer {
         debugGUI = true;
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
-        guiIO = &ImGui::GetIO();
-        guiIO->ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-        guiIO->ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-        //guiIO->ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+        ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+        ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+        ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+        ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
         ImGui::StyleColorsDark();
 
@@ -107,8 +103,8 @@ namespace gRenderer {
         ImGui_ImplGlfw_InitForOpenGL(this->window, true);
         ImGui_ImplOpenGL3_Init("#version 330");
 
-        guiIO->Fonts->AddFontDefault();
-        ImFont* robotoMonoFont = guiIO->Fonts->AddFontFromFileTTF("src/gRenderer/RobotoMono.ttf", 13.f, NULL, guiIO->Fonts->GetGlyphRangesDefault());
+        ImGui::GetIO().Fonts->AddFontDefault();
+        ImFont* robotoMonoFont = ImGui::GetIO().Fonts->AddFontFromFileTTF("src/gRenderer/RobotoMono.ttf", 13.f, NULL, ImGui::GetIO().Fonts->GetGlyphRangesDefault());
         IM_ASSERT(robotoMonoFont != NULL);
         ImGui::PushFont(robotoMonoFont);
 

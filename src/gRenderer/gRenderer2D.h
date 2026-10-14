@@ -9,14 +9,17 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <GLFW/glfw3.h>
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
 #include <iostream>
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
+#include "../../include/imgui/imgui.h"
+#include "../../include/imgui/backends/imgui_impl_glfw.h"
+#include "../../include/imgui/backends/imgui_impl_opengl3.h"
+#include <GLFW/glfw3.h>
+//#include <imgui.h>
+//#include <imgui_impl_glfw.h>
+//#include <imgui_impl_opengl3.h>
 
 // Ignore draw calls when the window is minimized
 #define G_LIMIT_MINIMIZED_PERFORMANCE true
@@ -73,6 +76,5 @@ namespace gRenderer {
             unsigned int compileShaders();
 
             bool debugGUI;
-            ImGuiIO* guiIO;
     };
 }

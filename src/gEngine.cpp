@@ -1,5 +1,4 @@
 #include "gEngine.h"
-#include "Scene.h"
 
 gEngine::gEngine(gApplication* a) : app(a), developerDebug(true) {
     
@@ -65,7 +64,7 @@ void gEngine::start() {
         Vector4 ortho = Vector4(-(renderer.winInfo.width / 2), renderer.winInfo.width / 2, -(renderer.winInfo.height / 2), renderer.winInfo.height / 2);
         gCamera* activeCam = app->activeScene->getActiveCam();
         if(activeCam != nullptr) activeCam->realign(ortho);
-        else std::cout << "Warning: missing active Camera!" << std::endl;
+        else std::cout << "Warning: missing active Camera!\n";
 
         physics.init(app->activeScene);
     }
@@ -113,6 +112,7 @@ void gEngine::run() {
         physics.physicsTick();
         app->tick();
         draw(vao, ibo);
+        windowDimensions = {renderer.winInfo.width, renderer.winInfo.height};
     }
 }
 
@@ -139,10 +139,10 @@ void gEngine::draw(const gRenderer::VertexArray& vao, const gRenderer::IndexBuff
 
     if(app->activeScene) {
         for(const auto &e : app->activeScene->getEntities()) {
-            Matrix4 model = getModelMatrix(e->transform);
+            //Matrix4 model = getModelMatrix(e->transform);
             
             program->bind();
-            program->setUniformMat4f("u_mvp", model);
+            program->setUniformMat4f("u_mvp", e->transform.getMatrix());
 
             if(const auto &c = e->getComponent<TextureComponent>()) {
                 c->getTexture()->bind(0);
