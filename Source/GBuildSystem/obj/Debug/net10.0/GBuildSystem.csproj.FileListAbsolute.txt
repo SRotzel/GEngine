@@ -1,0 +1,15 @@
+/home/sprotzel/Documents/Development/GBuildSystem/bin/Debug/net10.0/GBuildSystem
+/home/sprotzel/Documents/Development/GBuildSystem/bin/Debug/net10.0/GBuildSystem.deps.json
+/home/sprotzel/Documents/Development/GBuildSystem/bin/Debug/net10.0/GBuildSystem.runtimeconfig.json
+/home/sprotzel/Documents/Development/GBuildSystem/bin/Debug/net10.0/GBuildSystem.dll
+/home/sprotzel/Documents/Development/GBuildSystem/bin/Debug/net10.0/GBuildSystem.pdb
+/home/sprotzel/Documents/Development/GBuildSystem/obj/Debug/net10.0/GBuildSystem.GeneratedMSBuildEditorConfig.editorconfig
+/home/sprotzel/Documents/Development/GBuildSystem/obj/Debug/net10.0/GBuildSystem.AssemblyInfoInputs.cache
+/home/sprotzel/Documents/Development/GBuildSystem/obj/Debug/net10.0/GBuildSystem.AssemblyInfo.cs
+/home/sprotzel/Documents/Development/GBuildSystem/obj/Debug/net10.0/GBuildSystem.csproj.CoreCompileInputs.cache
+/home/sprotzel/Documents/Development/GBuildSystem/obj/Debug/net10.0/GBuildSystem.sourcelink.json
+/home/sprotzel/Documents/Development/GBuildSystem/obj/Debug/net10.0/GBuildSystem.dll
+/home/sprotzel/Documents/Development/GBuildSystem/obj/Debug/net10.0/refint/GBuildSystem.dll
+/home/sprotzel/Documents/Development/GBuildSystem/obj/Debug/net10.0/GBuildSystem.pdb
+/home/sprotzel/Documents/Development/GBuildSystem/obj/Debug/net10.0/GBuildSystem.genruntimeconfig.cache
+/home/sprotzel/Documents/Development/GBuildSystem/obj/Debug/net10.0/ref/GBuildSystem.dll

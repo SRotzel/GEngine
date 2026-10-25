@@ -1,0 +1,2 @@
+/home/sprotzel/Documents/Development/GBuildSystem/bin/Release/net10.0/linux-x64/publish/GBuildSystem.pdb
+/home/sprotzel/Documents/Development/GBuildSystem/bin/Release/net10.0/linux-x64/publish/GBuildSystem

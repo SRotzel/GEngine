@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "5nXfAYdlfk4=",
+  "success": true,
+  "projectFilePath": "/home/sprotzel/Documents/Development/GBuildSystem/GBuildSystem.csproj",
+  "expectedPackageFiles": [
+    "/home/sprotzel/.nuget/packages/microsoft.net.illink.tasks/10.0.12/microsoft.net.illink.tasks.10.0.12.nupkg.sha512",
+    "/home/sprotzel/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/10.0.12/microsoft.netcore.app.runtime.linux-x64.10.0.12.nupkg.sha512",
+    "/home/sprotzel/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/10.0.12/microsoft.aspnetcore.app.runtime.linux-x64.10.0.12.nupkg.sha512",
+    "/home/sprotzel/.nuget/packages/microsoft.netcore.app.host.linux-x64/10.0.12/microsoft.netcore.app.host.linux-x64.10.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}
