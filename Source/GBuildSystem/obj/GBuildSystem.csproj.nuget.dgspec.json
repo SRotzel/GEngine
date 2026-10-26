@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/sprotzel/Documents/Development/GBuildSystem/GBuildSystem.csproj": {}
+    "/home/sprotzel/Documents/Development/GEngine/Source/GBuildSystem/GBuildSystem.csproj": {}
   },
   "projects": {
-    "/home/sprotzel/Documents/Development/GBuildSystem/GBuildSystem.csproj": {
+    "/home/sprotzel/Documents/Development/GEngine/Source/GBuildSystem/GBuildSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/sprotzel/Documents/Development/GBuildSystem/GBuildSystem.csproj",
+        "projectUniqueName": "/home/sprotzel/Documents/Development/GEngine/Source/GBuildSystem/GBuildSystem.csproj",
         "projectName": "GBuildSystem",
-        "projectPath": "/home/sprotzel/Documents/Development/GBuildSystem/GBuildSystem.csproj",
+        "projectPath": "/home/sprotzel/Documents/Development/GEngine/Source/GBuildSystem/GBuildSystem.csproj",
         "packagesPath": "/home/sprotzel/.nuget/packages/",
-        "outputPath": "/home/sprotzel/Documents/Development/GBuildSystem/obj/",
+        "outputPath": "/home/sprotzel/Documents/Development/GEngine/Source/GBuildSystem/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/sprotzel/.nuget/NuGet/NuGet.Config"
@@ -48,7 +48,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.12, )",
+              "version": "[10.0.13, )",
               "autoReferenced": true
             }
           },
@@ -66,15 +66,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
-              "version": "[10.0.12, 10.0.12]"
+              "version": "[10.0.13, 10.0.13]"
             },
             {
               "name": "Microsoft.NETCore.App.Host.linux-x64",
-              "version": "[10.0.12, 10.0.12]"
+              "version": "[10.0.13, 10.0.13]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.linux-x64",
-              "version": "[10.0.12, 10.0.12]"
+              "version": "[10.0.13, 10.0.13]"
             }
           ],
           "frameworkReferences": {
@@ -82,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/10.0.112/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/10.0.113/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

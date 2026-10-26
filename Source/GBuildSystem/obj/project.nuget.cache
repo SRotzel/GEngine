@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "5nXfAYdlfk4=",
+  "dgSpecHash": "/CqXWX/4dLw=",
   "success": true,
-  "projectFilePath": "/home/sprotzel/Documents/Development/GBuildSystem/GBuildSystem.csproj",
+  "projectFilePath": "/home/sprotzel/Documents/Development/GEngine/Source/GBuildSystem/GBuildSystem.csproj",
   "expectedPackageFiles": [
-    "/home/sprotzel/.nuget/packages/microsoft.net.illink.tasks/10.0.12/microsoft.net.illink.tasks.10.0.12.nupkg.sha512",
-    "/home/sprotzel/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/10.0.12/microsoft.netcore.app.runtime.linux-x64.10.0.12.nupkg.sha512",
-    "/home/sprotzel/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/10.0.12/microsoft.aspnetcore.app.runtime.linux-x64.10.0.12.nupkg.sha512",
-    "/home/sprotzel/.nuget/packages/microsoft.netcore.app.host.linux-x64/10.0.12/microsoft.netcore.app.host.linux-x64.10.0.12.nupkg.sha512"
+    "/home/sprotzel/.nuget/packages/microsoft.net.illink.tasks/10.0.13/microsoft.net.illink.tasks.10.0.13.nupkg.sha512",
+    "/home/sprotzel/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/10.0.13/microsoft.netcore.app.runtime.linux-x64.10.0.13.nupkg.sha512",
+    "/home/sprotzel/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/10.0.13/microsoft.aspnetcore.app.runtime.linux-x64.10.0.13.nupkg.sha512",
+    "/home/sprotzel/.nuget/packages/microsoft.netcore.app.host.linux-x64/10.0.13/microsoft.netcore.app.host.linux-x64.10.0.13.nupkg.sha512"
   ],
   "logs": []
 }

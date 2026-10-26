@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net10.0": {
-      "Microsoft.NET.ILLink.Tasks/10.0.12": {
+      "Microsoft.NET.ILLink.Tasks/10.0.13": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -10,7 +10,7 @@
       }
     },
     "net10.0/linux-x64": {
-      "Microsoft.NET.ILLink.Tasks/10.0.12": {
+      "Microsoft.NET.ILLink.Tasks/10.0.13": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -19,10 +19,10 @@
     }
   },
   "libraries": {
-    "Microsoft.NET.ILLink.Tasks/10.0.12": {
-      "sha512": "Bu4NHC/z5uVC1G8lcdwczr1K4OTQzMnGMDfa+PrXZEJHlcQ6Ndhr8bzsU4xurw1JLwEnFvKUfJqWNM7fR6rj6A==",
+    "Microsoft.NET.ILLink.Tasks/10.0.13": {
+      "sha512": "EasWS8Q1XPCpGQpH0VTs/vI1s/pworiz+wiS6yDWuGHO1FvGun7cVZBIfFv2sFtG9M63wRhepMswIKDae8XgQg==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/10.0.12",
+      "path": "microsoft.net.illink.tasks/10.0.13",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -34,7 +34,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.10.0.12.nupkg.sha512",
+        "microsoft.net.illink.tasks.10.0.13.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net/ILLink.Tasks.deps.json",
         "tools/net/ILLink.Tasks.dll",
@@ -55,7 +55,7 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
-      "Microsoft.NET.ILLink.Tasks >= 10.0.12"
+      "Microsoft.NET.ILLink.Tasks >= 10.0.13"
     ]
   },
   "packageFolders": {
@@ -64,11 +64,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/sprotzel/Documents/Development/GBuildSystem/GBuildSystem.csproj",
+      "projectUniqueName": "/home/sprotzel/Documents/Development/GEngine/Source/GBuildSystem/GBuildSystem.csproj",
       "projectName": "GBuildSystem",
-      "projectPath": "/home/sprotzel/Documents/Development/GBuildSystem/GBuildSystem.csproj",
+      "projectPath": "/home/sprotzel/Documents/Development/GEngine/Source/GBuildSystem/GBuildSystem.csproj",
       "packagesPath": "/home/sprotzel/.nuget/packages/",
-      "outputPath": "/home/sprotzel/Documents/Development/GBuildSystem/obj/",
+      "outputPath": "/home/sprotzel/Documents/Development/GEngine/Source/GBuildSystem/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/sprotzel/.nuget/NuGet/NuGet.Config"
@@ -105,7 +105,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[10.0.12, )",
+            "version": "[10.0.13, )",
             "autoReferenced": true
           }
         },
@@ -123,15 +123,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
-            "version": "[10.0.12, 10.0.12]"
+            "version": "[10.0.13, 10.0.13]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.linux-x64",
-            "version": "[10.0.12, 10.0.12]"
+            "version": "[10.0.13, 10.0.13]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.linux-x64",
-            "version": "[10.0.12, 10.0.12]"
+            "version": "[10.0.13, 10.0.13]"
           }
         ],
         "frameworkReferences": {
@@ -139,7 +139,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/10.0.112/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/lib64/dotnet/sdk/10.0.113/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

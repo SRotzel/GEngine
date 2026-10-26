@@ -1,4 +1,6 @@
-﻿namespace GBuildSystem
+﻿using System.Text.Json;
+
+namespace GBuildSystem
 {
     class GBuildSystemCLI
     {
@@ -21,7 +23,7 @@
                         break;
                     case "new":
                         Console.WriteLine("Creating a new project...");
-                        GProject.CreateProj(args[i + 1], debug);
+                        GProject.CreateProject(args[i + 1], debug);
                         i++;
                         break;
                     case "module":
@@ -30,7 +32,15 @@
                         i++;
                         break;
                     case "build":
-                        Console.WriteLine("Building the project...");
+                        Console.WriteLine("Building project...");
+                        if(args.Length > i + 1)
+                        {
+                            GProject.buildProject(args[i + 1]);
+                            i++;
+                        } else
+                        {
+                            GProject.buildProject();
+                        }
                         break;
                     case "clean":
                         Console.WriteLine("Cleaning the project...");
