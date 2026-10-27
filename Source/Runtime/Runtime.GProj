@@ -1,0 +1,19 @@
+{
+  "Name": "Runtime",
+  "Version": 1,
+  "WorkingDir": "/home/sprotzel/Documents/Development/GEngine/Source/Runtime",
+  "Debug": false,
+  "modules": [
+    "AudioEngine",
+    "Components",
+    "Core",
+    "Engine",
+    "Entity",
+    "Input",
+    "ITickable",
+    "Physics",
+    "Renderer",
+    "Scene",
+    "Time"
+  ]
+}

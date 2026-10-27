@@ -1,0 +1,6 @@
+{
+  "ModuleName": "Physics",
+  "PublicDependencies": ["Core"],
+  "PrivateDependencies": ["Components", "Time", "Scene"],
+  "hash": ""
+}

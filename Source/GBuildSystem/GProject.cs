@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -160,7 +161,7 @@ namespace GBuildSystem
                 return;
             }
 
-            writer.WriteLine("cmake_minimum_required(VERSION 3.10)\nproject(" + projFileData.Name + ")\nset(CMAKE_CXX_STANDARD 20)\n\n");
+            writer.WriteLine("cmake_minimum_required(VERSION 3.10)\nproject(" + projFileData.Name + ")\nset(CMAKE_CXX_STANDARD 20)\n");
 
             // build modules
             int count = 0;
@@ -187,50 +188,74 @@ namespace GBuildSystem
                 }
 
                 Console.WriteLine($"    [{count}/{projFileData.modules.Count}] Building module: {modFileData.ModuleName} in {modDir}");
-                if(GModule.CalculateHash(modDir) == modFileData.hash)
+                string modHash = GModule.CalculateHash(modDir);
+                Console.WriteLine("    Checksum: " + modHash);
+
+                if(modHash.Equals(modFileData.hash))
                 {
-                    Console.WriteLine($"    Module {modFileData.ModuleName} is up to date. Skipping build.");
+                    Console.WriteLine($"    => Module {modFileData.ModuleName} is up to date. Skipping build.");
                     continue;
                 }
-                Console.WriteLine($"    Module {modFileData.ModuleName} is out of date. Building...");
+                Console.WriteLine($"    => Module {modFileData.ModuleName} is out of date. Building...");
 
                 string[] cppFiles = Directory.GetFiles(modDir, "Private/*.cpp", SearchOption.AllDirectories);
                 if(cppFiles.Length == 0)
                 {
-                    Console.WriteLine("    No C++ source files found, skipping");
+                    Console.WriteLine("    No C++ source files found, skipping...");
                     continue;
                 }
-                Console.WriteLine("    Found " + cppFiles.Length + " C++ source files");
+                Console.WriteLine("    => Found " + cppFiles.Length + " C++ source files");
 
                 writer.WriteLine("add_library(" + modFileData.ModuleName + " STATIC ");
                 foreach(string cppFile in cppFiles)
                 {
                     writer.WriteLine(cppFile + " ");
                 }
-                writer.WriteLine(")\n");
+                writer.WriteLine(")");
 
                 if(modFileData.PublicDependencies.Count > 0)
                 {
-                    writer.WriteLine("target_link_libraries(" + modFileData.ModuleName + "\n");
+                    writer.WriteLine("target_link_libraries(" + modFileData.ModuleName);
                     foreach(string pubDep in modFileData.PublicDependencies)
                     {
-                        writer.WriteLine(" PUBLIC " + pubDep + "\n");
+                        writer.WriteLine(" PUBLIC " + pubDep);
                     }
-                    writer.WriteLine(")\n");
+                    writer.WriteLine(")");
                 }
 
                 if(modFileData.PrivateDependencies.Count > 0)
                 {
-                    writer.WriteLine("target_link_libraries(" + modFileData.ModuleName + "\n");
+                    writer.WriteLine("target_link_libraries(" + modFileData.ModuleName);
                     foreach(string pubDep in modFileData.PrivateDependencies)
                     {
-                        writer.WriteLine(" PRIVATE " + pubDep + "\n");
+                        writer.WriteLine(" PRIVATE " + pubDep);
                     }
-                    writer.WriteLine(")\n");
+                    writer.WriteLine(")");
                 }
             }
 
             writer.Close();
+
+            if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                try
+                {
+                    System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo()
+                    {
+                        FileName = "/bin/bash",
+                        Arguments = "cmake --build Bin"
+                    };
+                    System.Diagnostics.Process proc  = new System.Diagnostics.Process() { StartInfo = info };
+                    proc.Start();
+                } catch(Exception e)
+                {
+                    Console.WriteLine("[ERROR] Couldn't invoke cmake: " + e.Message);
+                    return;
+                } 
+            } else
+            {
+                Console.WriteLine("[ERROR] unsupported OS");
+            }
         }
     }
 }

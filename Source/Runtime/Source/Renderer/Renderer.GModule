@@ -1,0 +1,6 @@
+{
+  "ModuleName": "Renderer",
+  "PublicDependencies": [],
+  "PrivateDependencies": ["ThirdParty"],
+  "hash": ""
+}

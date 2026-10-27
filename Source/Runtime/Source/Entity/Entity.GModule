@@ -1,0 +1,6 @@
+{
+  "ModuleName": "Entity",
+  "PublicDependencies": ["Core"],
+  "PrivateDependencies": ["Components"],
+  "hash": ""
+}

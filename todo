@@ -1,0 +1,5 @@
+[] tickable interface class
+   => make everything tickable
+
+GBS:
+[] if hash value is empty in module file, build module and fill hash variable

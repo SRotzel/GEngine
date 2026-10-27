@@ -1,0 +1,6 @@
+{
+  "ModuleName": "AudioEngine",
+  "PublicDependencies": ["Core"],
+  "PrivateDependencies": ["ThirdParty"],
+  "hash": "dd975b82f494d21ee0ab3499a7da6d53cd3a2612197f70a86889a3d556130039"
+}

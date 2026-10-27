@@ -1,0 +1,6 @@
+{
+  "ModuleName": "Scene",
+  "PublicDependencies": ["Core"],
+  "PrivateDependencies": ["Entity"],
+  "hash": ""
+}

@@ -1,0 +1,6 @@
+{
+  "ModuleName": "Input",
+  "PublicDependencies": ["Core"],
+  "PrivateDependencies": [],
+  "hash": ""
+}

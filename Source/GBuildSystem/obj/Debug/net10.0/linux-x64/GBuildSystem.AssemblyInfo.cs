@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GBuildSystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4327a37e73d11e58c0cbb00a238f4f89fd1706c0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+45568fd07c61b5119101aa96d5f4c84b9de7d25f")]
 [assembly: System.Reflection.AssemblyProductAttribute("GBuildSystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GBuildSystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,6 @@
+{
+  "ModuleName": "Engine",
+  "PublicDependencies": ["Core"],
+  "PrivateDependencies": ["Renderer"],
+  "hash": ""
+}

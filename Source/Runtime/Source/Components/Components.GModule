@@ -1,0 +1,6 @@
+{
+    "ModuleName": "Components",
+    "PublicDependencies": ["Core"],
+    "PrivateDependencies": ["Time", "Renderer", "ThirdParty"],
+    "hash": ""
+}
