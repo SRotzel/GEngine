@@ -1,12 +1,14 @@
 #pragma once
-#include <GCore.h>
 
+/*Engine Headers*/
+#include <GCore.h>
 #include <miniaudio/miniaudio.h>
+
 #include <iostream>
 #include <unordered_map>
 #include <memory>
 
-class AudioEngine {
+class AudioEngine : public ITickable {
 public:
     AudioEngine();
     ~AudioEngine();
@@ -19,8 +21,8 @@ public:
     void setVolume(gUint id, float volume);                  // set volume of sound
     void pan(gUint id, float pan);
 
-    void tick();
-    void end();
+    void tick() override;
+    void end() override;
 
 private:
     ma_engine soundEngine;

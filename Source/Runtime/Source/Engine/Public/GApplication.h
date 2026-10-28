@@ -1,12 +1,11 @@
 #pragma once
-#include <Scene.h>
-#include <imgui/imgui.h>
-#include <GCore.h>
+#include "Scene.h"
+#include "GCore.h"
 
-class gApplication : public ITickable{
+class GApplication : public ITickable {
 public:
-    gApplication() {}
-    virtual ~gApplication() {}
+    GApplication() {}
+    virtual ~GApplication() {}
 
     virtual void start() {
         gScene* scene = new gScene();
@@ -37,6 +36,6 @@ public:
 
 protected:
     friend gEngine;
-    using Super = gApplication;
+    using Super = GApplication;
     gScene *activeScene = nullptr;
 };

@@ -1,9 +1,11 @@
 #pragma once
-#include <Component.h>
-#include <ColliderComponent.h>
-#include <PhysicsComponent.h>
-#include <TextureComponent.h>
-#include <GCore.h>
+
+/*Engine Headers*/
+#include "Component.h"
+#include "ColliderComponent.h"
+#include "PhysicsComponent.h"
+#include "TextureComponent.h"
+#include "GCore.h"
 
 #include <memory>
 #include <vector>
@@ -11,7 +13,7 @@
 
 class gScene;
 
-class gEntity {
+class gEntity : public ITickable {
 public:
     gEntity(gScene* parent);
     virtual ~gEntity();
@@ -20,10 +22,6 @@ public:
     gEntity& operator=(const gEntity&) = delete;
     gEntity(gEntity&&) = default;
     gEntity& operator=(gEntity&&) = default;
-
-    virtual void start();
-    virtual void tick();
-    virtual void end();
 
     void attachComponent(std::unique_ptr<Component>);
 
@@ -58,16 +56,11 @@ public:
 
     inline PhysicsComponent& cphysics() { return *getComponent<PhysicsComponent>(); }
     inline TextureComponent& ctexture() { return *getComponent<TextureComponent>(); }
-    inline AABBColliderComponent& ccollider() { return *getComponent<AABBColliderComponent>(); }
-    inline bool isActive() const { return this->active; }
-    inline void setActive(bool v) { this->active = v; }
 
     Transform transform;
     gUint id;
 
-protected:
-    bool active;
-    using Super = gEntity;
+protected: using Super = gEntity;
 private:
     gScene *owner;
     std::vector<std::unique_ptr<Component>> components;

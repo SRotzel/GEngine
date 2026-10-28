@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Security.Cryptography;
+using System.Security.AccessControl;
 
 namespace GBuildSystem 
 {
@@ -83,6 +84,35 @@ namespace GBuildSystem
             string jsonString = JsonSerializer.Serialize(moduleRules, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(Path.Combine(modDir, moduleName + ".GModule"), jsonString);
             Console.WriteLine("------------------------------------------------");
+        }
+
+        public static void moduleInfo(string module, string dir)
+        {
+            string modDir = Path.Combine(dir, module);
+            string modFile = Path.Combine(modDir, module + ".GModule");
+            if(!File.Exists(modFile))
+            {
+                Console.WriteLine("[ERROR] couldn't find module " + module);
+                return;
+            }
+
+            string jsonString = File.ReadAllText(modFile);
+            var modFileData = JsonSerializer.Deserialize<GModuleRules>(jsonString);
+
+            Console.WriteLine("$ Name: " + modFileData.ModuleName);
+            Console.WriteLine("$ Public Dependencies: ");
+            foreach(string pub in modFileData.PublicDependencies)
+            {
+                Console.WriteLine("    " + pub);
+            } 
+
+            Console.WriteLine("$ Private Dependencies: ");
+            foreach(string priv in modFileData.PrivateDependencies) 
+            {
+                Console.WriteLine("    " + priv);
+            }
+
+            Console.WriteLine("$ Hash: " + modFileData.hash);
         }
     }
 }

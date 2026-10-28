@@ -1,6 +1,6 @@
 {
     "ModuleName": "Core",
     "PublicDependencies": ["ITickable"],
-    "PrivateDependencies": [],
+    "PrivateDependencies": ["Renderer"], 
     "hash": ""
 }

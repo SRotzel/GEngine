@@ -2,10 +2,13 @@
 
 namespace GBuildSystem
 {
+
     class GBuildSystemCLI
     {
+        const double version = 0.2;
         static void Main(string[] args)
         {
+            Console.WriteLine("Version " + version);
             Console.WriteLine("GBuildSystem is running...");
             if (args.Length < 1)
             {
@@ -41,6 +44,18 @@ namespace GBuildSystem
                         {
                             GProject.buildProject();
                         }
+                        break;
+                    case "pinfo":
+                        if(args.Length > i + 1)
+                            GProject.projectInfo(args[i+1]);
+                        else 
+                            Console.WriteLine("Missing arguments!");
+                        break;
+                    case "minfo":
+                        if(args.Length > i + 1)
+                            GModule.moduleInfo(args[i+1], Directory.GetCurrentDirectory());
+                        else 
+                            Console.WriteLine("Missing arguments!");
                         break;
                     case "clean":
                         Console.WriteLine("Cleaning the project...");

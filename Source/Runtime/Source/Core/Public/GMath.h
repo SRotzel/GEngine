@@ -1,6 +1,6 @@
 #pragma once
 
-#include <gRenderer/Camera.h>
+#include "Camera.h"
 #include <cmath>
 #include <glm/ext/matrix_transform.hpp>
 #include <glm/vec3.hpp>
@@ -23,7 +23,7 @@ static inline Vector2 v2zero() { return Vector2 {0.f, 0.f}; }
 static inline Vector3 v3zero() { return Vector3 {0.f, 0.f, 0.f}; }
 static inline Vector4 v4zero() { return Vector4 {0.f, 0.f, 0.f, 0.f}; }
 
-using gCamera = gRenderer::grCamera;
+using GCamera = gRenderer::grCamera;
 
 struct Transform {
     glm::vec2 position{0.f, 0.f};

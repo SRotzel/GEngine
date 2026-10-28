@@ -1,5 +1,4 @@
 #include "ColliderComponent.h"
-#include <imgui.h>
 
 AABBColliderComponent::AABBColliderComponent(Transform t, unsigned int id) 
         : Component(id) {

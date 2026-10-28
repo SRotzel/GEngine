@@ -126,136 +126,28 @@ namespace GBuildSystem
 
         public static void buildProject(string directory = "")
         {
-            // Setup
-            string cwd = Directory.GetCurrentDirectory();
-            string projFile;
-            string binDir = Path.Combine(directory, "Bin/");
+            DateTime begin = DateTime.Now;
+            GBuilder.build(directory);
 
-            if(directory == "")
-                projFile = Path.Combine(cwd, ".GProj");   
-            else
-                projFile = Path.Combine(cwd, directory, directory + ".GProj");
+            TimeSpan elapsed = begin - DateTime.Now;
+            Console.WriteLine("Finished building in " + elapsed);
+        }
 
+        public static void projectInfo(string project)
+        {
+            string projDir = Path.Combine(Directory.GetCurrentDirectory(), project);
+            string projFile = Path.Combine(projDir, project + ".GProj");
             if(!File.Exists(projFile))
             {
-                Console.WriteLine("[ERROR] Project file not found: " + projFile);
-                return;
+                Console.WriteLine("[ERROR] couldn't find project " + project);
             }
-            if(!Directory.Exists(binDir))
-                Directory.CreateDirectory(binDir);
 
             string jsonString = File.ReadAllText(projFile);
-            var projFileData = JsonSerializer.Deserialize<ProjFile>(jsonString);
-            if(projFileData == null)
-            {
-                Console.WriteLine("[ERROR] Couldn't read project file: " + projFile);
-                return;
-            }
+            var projData = JsonSerializer.Deserialize<ProjFile>(jsonString);
 
-            string CMakeListsPath = Path.Combine(binDir, "CMakeLists.txt");
-            File.WriteAllText(CMakeListsPath, ""); // Clear the file if it exists
-            StreamWriter writer = new StreamWriter(CMakeListsPath, true);
-            if(writer == null)
-            {
-                Console.WriteLine("[ERROR] Couldn't create CMakeLists.txt file: " + CMakeListsPath);
-                return;
-            }
-
-            writer.WriteLine("cmake_minimum_required(VERSION 3.10)\nproject(" + projFileData.Name + ")\nset(CMAKE_CXX_STANDARD 20)\n");
-
-            // build modules
-            int count = 0;
-            Console.WriteLine($"Building project: {projFileData.Name} (Version: {projFileData.Version})");
-            foreach(string mod in projFileData.modules)
-            {
-                Console.WriteLine("--------------------------------");
-                count++; 
-
-                string modDir = Path.Combine(projFileData.WorkingDir, "Source", mod);
-                string modFile = Path.Combine(modDir, mod + ".GModule");
-                if(!File.Exists(modFile))
-                {
-                    Console.WriteLine("[ERROR] Module file not found: " + modFile);
-                    return;
-                }
-
-                string modJsonString = File.ReadAllText(modFile);
-                var modFileData = JsonSerializer.Deserialize<GModuleRules>(modJsonString);
-                if(modFileData == null)
-                {
-                    Console.WriteLine("[ERROR] Couldn't read module file: " + modFile);
-                    continue;
-                }
-
-                Console.WriteLine($"    [{count}/{projFileData.modules.Count}] Building module: {modFileData.ModuleName} in {modDir}");
-                string modHash = GModule.CalculateHash(modDir);
-                Console.WriteLine("    Checksum: " + modHash);
-
-                if(modHash.Equals(modFileData.hash))
-                {
-                    Console.WriteLine($"    => Module {modFileData.ModuleName} is up to date. Skipping build.");
-                    continue;
-                }
-                Console.WriteLine($"    => Module {modFileData.ModuleName} is out of date. Building...");
-
-                string[] cppFiles = Directory.GetFiles(modDir, "Private/*.cpp", SearchOption.AllDirectories);
-                if(cppFiles.Length == 0)
-                {
-                    Console.WriteLine("    No C++ source files found, skipping...");
-                    continue;
-                }
-                Console.WriteLine("    => Found " + cppFiles.Length + " C++ source files");
-
-                writer.WriteLine("add_library(" + modFileData.ModuleName + " STATIC ");
-                foreach(string cppFile in cppFiles)
-                {
-                    writer.WriteLine(cppFile + " ");
-                }
-                writer.WriteLine(")");
-
-                if(modFileData.PublicDependencies.Count > 0)
-                {
-                    writer.WriteLine("target_link_libraries(" + modFileData.ModuleName);
-                    foreach(string pubDep in modFileData.PublicDependencies)
-                    {
-                        writer.WriteLine(" PUBLIC " + pubDep);
-                    }
-                    writer.WriteLine(")");
-                }
-
-                if(modFileData.PrivateDependencies.Count > 0)
-                {
-                    writer.WriteLine("target_link_libraries(" + modFileData.ModuleName);
-                    foreach(string pubDep in modFileData.PrivateDependencies)
-                    {
-                        writer.WriteLine(" PRIVATE " + pubDep);
-                    }
-                    writer.WriteLine(")");
-                }
-            }
-
-            writer.Close();
-
-            if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                try
-                {
-                    System.Diagnostics.ProcessStartInfo info = new System.Diagnostics.ProcessStartInfo()
-                    {
-                        FileName = "/bin/bash",
-                        Arguments = "cmake --build Bin"
-                    };
-                    System.Diagnostics.Process proc  = new System.Diagnostics.Process() { StartInfo = info };
-                    proc.Start();
-                } catch(Exception e)
-                {
-                    Console.WriteLine("[ERROR] Couldn't invoke cmake: " + e.Message);
-                    return;
-                } 
-            } else
-            {
-                Console.WriteLine("[ERROR] unsupported OS");
-            }
+            Console.WriteLine("$ Name: " + projData.Name);
+            Console.WriteLine("$ Version " + projData.Version);
+            Console.WriteLine($"$ {projData.modules.Count} modules");
         }
     }
 }

@@ -17,10 +17,6 @@ public:
         : Component(id), path(texturePath) {
         texture = std::make_unique<Texture>(path);
     }
-
-    void start() override {
-        
-    }
     
     inline Texture* getTexture() const { return texture.get(); }
 

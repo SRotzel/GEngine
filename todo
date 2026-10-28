@@ -1,5 +1,7 @@
 [] tickable interface class
    => make everything tickable
+[] concern about thirdparty
 
 GBS:
-[] if hash value is empty in module file, build module and fill hash variable
+[X] if hash value is empty in module file, build module and fill hash variable
+[] Project dependencies (System installed libraries or other projects)
