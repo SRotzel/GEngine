@@ -21,7 +21,7 @@ namespace GBuildSystem
             {
                 switch(args[i])
                 {
-                    case "--debug":
+                    case "--debug" or "-D":
                         debug = true;
                         break;
                     case "new":
