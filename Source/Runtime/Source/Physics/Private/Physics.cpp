@@ -1,7 +1,7 @@
 #include "Physics.h"
-#include "Components/ColliderComponent.h"
-#include "Components/PhysicsComponent.h"
-#include "gEngineCore.h"
+#include "ColliderComponent.h"
+#include "PhysicsComponent.h"
+#include "GCore.h"
 
 PhysicsSystem::PhysicsSystem(gScene* s) {
     scene = s;

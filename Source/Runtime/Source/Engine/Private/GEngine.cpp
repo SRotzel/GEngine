@@ -1,44 +1,27 @@
-#include "gEngine.h"
+#include "GEngine.h"
 #include "Entity.h"
-#include "gEngineCore.h"
+#include "GCore.h"
+#include "GApplication.h"
+
 #include <glm/ext/quaternion_transform.hpp>
-#include <imgui.h>
+#include <imgui/imgui.h>
 #include <memory>
 
-gEngine::gEngine(gApplication* a) : app(a), currentCam(-2.f, 2.f, -1.5f, 1.5f), developerDebug(true) {
+gEngine::gEngine(GApplication* a) : app(a), currentCam(-2.f, 2.f, -1.5f, 1.5f), developerDebug(true) {
     shaderPaths.push_back("src/shaders/basic.vert");
     shaderPaths.push_back("src/shaders/basic.frag");
 }
 gEngine::~gEngine() {}
 
-// TODO: refactor
-void gApplication::loadScene(gScene *s) {
-    if(s == nullptr) {
-        std::cout << "Attempting to load invalid Scene!\n";
-        return;
-    }
-    
-    if(activeScene) {
-        activeScene->end();
-        delete activeScene;
-        activeScene = s;
-        activeScene->start();
-        return;
-    }
-
-    activeScene = s;
-    activeScene->start();
-}
-
 void gEngine::addShader(const std::string &path) {
     shaderPaths.push_back(path);
 }
 
-void gEngine::setCamera(const gCamera &c) {
+void gEngine::setCamera(const GCamera &c) {
     currentCam = c;
 }
 
-gCamera *gEngine::getCamera() { return &currentCam; }
+GCamera *gEngine::getCamera() { return &currentCam; }
 
 void gEngine::start() {
     renderer.init(false, "gEngine", 1280, 720);

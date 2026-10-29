@@ -7,7 +7,8 @@
 #include <sstream>
 #include <vector>
 #include <unordered_map>
-#include "../../include/glad/glad.h"
+
+#include "glad/glad.h"
 
 namespace gRenderer {
     class ShaderProgram {

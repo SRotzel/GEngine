@@ -57,6 +57,10 @@ public:
     inline PhysicsComponent& cphysics() { return *getComponent<PhysicsComponent>(); }
     inline TextureComponent& ctexture() { return *getComponent<TextureComponent>(); }
 
+    void start() override;
+    void tick()  override;
+    void end()   override;
+
     Transform transform;
     gUint id;
 

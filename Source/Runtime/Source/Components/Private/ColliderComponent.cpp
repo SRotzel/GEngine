@@ -26,6 +26,7 @@ void AABBColliderComponent::tick() {
 
 void AABBColliderComponent::onDebug() {
     ImGui::Text("Collider Component");
+    bool active = isActive();
     ImGui::Checkbox("active", &active);
     ImGui::Value("Left", min.x);
     ImGui::Value("Right", max.x);

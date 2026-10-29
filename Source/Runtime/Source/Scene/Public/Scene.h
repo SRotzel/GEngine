@@ -1,9 +1,11 @@
 #pragma once
+
 #include <memory>
 #include <vector> 
 #include <unordered_map>
-#include <Entity.h>
-#include <GCore.h>
+
+#include "Entity.h"
+#include "GCore.h"
 
 class gScene {
 public: 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GCore.h"
-#include "Forward.h"
+class GEngine;
 
 #include <GLFW/glfw3.h>
 
@@ -15,11 +15,11 @@ public:
     static bool isKeyHeld(int key);
     static Vector2 getMousePos();
     
+    static void end();
+    static void tick();
     
 private:
     friend GEngine;
-    static void tick();
-    static void end();
     
     static GLFWwindow* context;
     static bool previousKeySnapshot[GLFW_KEY_LAST + 1];

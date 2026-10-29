@@ -1,5 +1,5 @@
 #pragma once
-#include "../../include/glad/glad.h"
+#include "glad/glad.h"
 
 namespace gRenderer {
     class VertexBuffer {

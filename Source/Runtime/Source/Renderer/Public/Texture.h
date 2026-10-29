@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <iostream>
-#include "../../include/glad/glad.h"
-#include "../../include/stb/stb_image.h"
+#include "glad/glad.h"
+#include "stb/stb_image.h"
 
 namespace gRenderer {
     class Texture {

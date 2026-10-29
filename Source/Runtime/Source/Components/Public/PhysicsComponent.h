@@ -12,6 +12,7 @@ public:
 
     void onDebug() override {
         ImGui::Text("Physics Component");
+        bool active = isActive();
         ImGui::Checkbox("active", &active);
         ImGui::SliderFloat("mass", &mass, 0.0f, 100.f);
         ImGui::SliderFloat("friction", &friction, 0.0f, 1.0f);

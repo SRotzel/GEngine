@@ -8,7 +8,9 @@ class gEntity;
 
 class Component : public ITickable {
 public:
-    Component(unsigned int id = 0) : id(id), active(true) {}
+    Component(unsigned int id = 0) : id(id) {
+        setActive(true);
+    }
     virtual ~Component() {}
 
     virtual void onDebug() {}

@@ -23,8 +23,8 @@ public:
     void run();
     void end();
 
-    void setCamera(const gCamera&);
-    gCamera* getCamera();
+    void setCamera(const GCamera&);
+    GCamera* getCamera();
 
 private:
     void draw(const gRenderer::VertexArray&, const gRenderer::IndexBuffer&);

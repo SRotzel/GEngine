@@ -1,9 +1,8 @@
 #include "Entity.h"
-#include "Components/Component.h"
-#include "gEngineCore.h"
-#include <memory>
 
-gEntity::gEntity(gScene* parent) : owner(parent), id(gGenerateID()), active(true) {}
+gEntity::gEntity(gScene* parent) : owner(parent), id(gGenerateID()) {
+    setActive(true);
+}
 gEntity::~gEntity() {}
 
 
